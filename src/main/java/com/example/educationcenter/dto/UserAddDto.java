@@ -20,7 +20,6 @@ public class UserAddDto {
     private int age;
     private int phoneNumber;
     private UserType userType;
-    private Course course;
 
 
 
