@@ -22,7 +22,7 @@ public class Message {
     private int id;
 
     @ManyToOne
-    private User touserId;
+    private User to_userId;
     @ManyToOne
     private User from_userId;
     private String message;
