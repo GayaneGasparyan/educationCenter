@@ -4,6 +4,8 @@ spring:
     username: root
     password: rootroot
 
+
+
 jpa:
   hibernate:
     ddl-auto: none
