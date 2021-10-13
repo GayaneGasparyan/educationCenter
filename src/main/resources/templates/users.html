@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/logout">logout</a><br>
+<br>
+Employee Page |  <a href="/addUser"> Add Employee</a><br>
+<!--Send Message <a href="/sendMessage"> send message</a><br>-->
+
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>surname</th>
+        <th>email</th>
+        <th>age</th>
+        <th>phoneNumber</th>
+        <th>address</th>
+        <th>Course</th>
+    </tr>
+    <tr th:each="allUsers: ${allUsers}">
+        <td th:text="${allUsers.id}"></td>
+        <td th:text="${allUsers.name}"></td>
+        <td th:text="${allUsers.surname}"></td>
+        <td th:text="${allUsers.email}"></td>
+        <td th:text="${allUsers.age}"></td>
+        <td th:text="${allUsers.phone_num}"></td>
+        <td th:text="${allUsers.address}"></td>
+        <td th:text="${allUsers.course.name}"></td>
+
+    </tr>
+
+
+</table>
+</body>
+</html>

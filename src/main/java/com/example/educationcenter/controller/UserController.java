@@ -28,17 +28,19 @@ public class UserController {
 
 
 
-    @GetMapping("/users")
+    @GetMapping("/user")
     public String UserPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         modelMap.addAttribute("user", currentUser.getUsername());
         return "user";
     }
 
-    @GetMapping("/user")
-    public String users(ModelMap modelMap) {
+    @GetMapping("/users")
+    public String users(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         List<User> allUsers = userServiceImpl.findAll();
         modelMap.addAttribute("allUsers", allUsers);
-        return "user";
+        List<User> all = userService.findUserByCourseId(currentUser.getUser().getId());
+
+        return "users";
     }
 
     @GetMapping("/addUser")
