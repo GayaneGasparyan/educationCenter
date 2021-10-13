@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
 </head>
-<body>
-<form action="/addUser" method="post">
-    <input type="text" name="name" placeholder="name"><br>
-    <input type="text" name="surname" placeholder="surname"><br>
-    <input type="text"name="email" placeholder="email"><br>
-    <input type="number"name="age" placeholder="age"><br>
-    <input type="text" name="phoneNumber" placeholder="phoneNumber"><br>
-    <input type="text" name="address" placeholder="address"><br>
-    <input type="text" name="position" placeholder="position"><br>
-    <input type="password" name="password" placeholder="password"><br>
-    <select name="userType">
-        <option value="LECTURER">LECTURER</option>
-        <option value="STUDENT">STUDENT</option>
-    </select>
-    Course  <select name="course.id">
-    <option th:each="course: ${courses}" th:text="${course.name} " th:value="${course.id}"></option>
-</select>
-    <input type="submit" value="Add">
-</form>
+
+<body id="home">
+<a href="/user" style="color: white">home</a>
+<div style="margin-left: 100px; margin-right: 500px">
+    <div>
+        <form action="/addUsers" method="post">
+            <input type="text" name="name" placeholder="name">
+
+            <input type="text" name="surname" placeholder="surname">
+
+            <input type="text" name="email" placeholder="email">
+
+            <input type="password" name="password" placeholder="password">
+
+            <input type="number" name="age" placeholder="age">
+
+            <input type="text" name="phone_num" placeholder="phoneNumber">
+
+            <input type="text" name="address" placeholder="address">
+
+            <input type="submit" value="ADD"/>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>

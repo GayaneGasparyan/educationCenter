@@ -22,8 +22,8 @@ public class Message {
     private int id;
 
     @ManyToOne
-    private User touser_Id;
+    private User toUserId;
     @ManyToOne
-    private User from_userId;
+    private User fromUserId;
     private String message;
 }

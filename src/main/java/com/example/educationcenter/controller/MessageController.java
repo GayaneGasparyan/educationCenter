@@ -41,7 +41,7 @@ public class MessageController {
 
         @PostMapping("/sendMessage")
         public String sendMessage(@ModelAttribute Message message, @AuthenticationPrincipal CurrentUser currentUser) {
-            message.setFrom_userId(currentUser.getUser());
+            message.setToUserId(currentUser.getUser());
             messageService.save(message);
             return "redirect:/users";
 
