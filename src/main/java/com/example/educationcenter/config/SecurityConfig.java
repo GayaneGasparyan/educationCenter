@@ -30,10 +30,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/users/**")
-                .hasAnyAuthority("ADMIN")
+
+          http
+                  .authorizeRequests()
+                  .antMatchers(HttpMethod.GET, "/users/**")
+                  .permitAll()
+
                 .antMatchers(HttpMethod.GET, "/")
                 .permitAll()
                 .and()
