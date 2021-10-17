@@ -1,7 +1,9 @@
 package com.example.educationcenter.controller;
 
+import com.example.educationcenter.model.Course;
 import com.example.educationcenter.model.User;
 import com.example.educationcenter.security.CurrentUser;
+import com.example.educationcenter.service.CourseService;
 import com.example.educationcenter.service.UserService;
 import com.example.educationcenter.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -24,43 +26,38 @@ public class UserController {
 
 
     private final PasswordEncoder passwordEncoder;
-
-
-
-
-    @GetMapping("/user")
-    public String UserPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        modelMap.addAttribute("user", currentUser.getUsername());
-        return "user";
-    }
+    private final CourseService courseService;
 
     @GetMapping("/users")
-    public String users(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        List<User> allUsers = userServiceImpl.findAll();
-        modelMap.addAttribute("allUsers", allUsers);
-        List<User> all = userService.findUserByCourseId(currentUser.getUser().getId());
+    public String users(ModelMap modelMap) {
+        List<User> all = userService.findAll();
+        modelMap.addAttribute("users", all);
+       return "users";
 
-        return "users";
     }
+
+
+
 
     @GetMapping("/addUser")
     public String addUser(ModelMap modelMap) {
-
-        return "user";
+        List<Course> all1 = courseService.findAll();
+        modelMap.addAttribute("courses", all1);
+        return "addUser";
     }
 
-    @PostMapping("/addUsers")
-    public String addUser(@ModelAttribute User user) {
+    @PostMapping("/admin/addUser")
+    public String addUserPost(@ModelAttribute User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.addUser(user);
-        return "redirect:/user";
+        userService.save(user);
+        return "redirect:/users";
     }
 
 
     @GetMapping("/userDelete")
     public String deleteUser(@RequestParam int id) {
         userService.deleteById(id);
-        return "redirect:/user";
+        return "redirect:/users";
     }
 
 }
