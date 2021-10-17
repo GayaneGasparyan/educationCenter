@@ -14,7 +14,7 @@
 </tr>
 
 <tr th:each="message:${messages}">
-    <td th:text="${message.from_userId.name}"></td>
+    <td th:text="${message.getToUserId()}"></td>
     <td th:text="${message.message}"></td>
 </tr>
 </body>

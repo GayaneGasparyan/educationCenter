@@ -11,4 +11,5 @@ public interface CourseService {
 
     void deleteById(int id);
 
+    void getById(int id);
 }

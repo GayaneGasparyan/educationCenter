@@ -7,8 +7,5 @@ import java.util.List;
 
 public interface MessageRepository extends JpaRepository<Message,Integer> {
 
-
-
-
     List<Message> findAllByToUserId(int id);
 }

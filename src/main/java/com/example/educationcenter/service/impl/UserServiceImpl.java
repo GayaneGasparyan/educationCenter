@@ -44,4 +44,9 @@ public class UserServiceImpl implements UserService {
     public void deleteAllByCourseId(int id) {
 
     }
+
+    @Override
+    public void save(User user) {
+
+    }
 }

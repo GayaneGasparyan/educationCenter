@@ -30,12 +30,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-          http
-                  .authorizeRequests()
-                  .antMatchers(HttpMethod.GET, "/users/**")
-                  .permitAll()
-
+        http
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/users/**")
+                .permitAll()
+                .antMatchers(HttpMethod.GET, "/addUser")
+//                .hasAnyAuthority("ADMIN")
+                .permitAll()
+                .antMatchers(HttpMethod.GET, "/courses/**")
+                .hasAnyAuthority("LECTURER", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/")
                 .permitAll()
                 .and()
@@ -57,7 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
 
 }
