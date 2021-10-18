@@ -2,9 +2,10 @@ package com.example.educationcenter.controller;
 
 import com.example.educationcenter.model.Course;
 import com.example.educationcenter.model.User;
+import com.example.educationcenter.model.UserType;
 import com.example.educationcenter.security.CurrentUser;
-import com.example.educationcenter.service.CourseService;
 import com.example.educationcenter.service.UserService;
+import com.example.educationcenter.service.impl.CourseServiceImpl;
 import com.example.educationcenter.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,41 +24,52 @@ import java.util.List;
 public class UserController {
     private final UserServiceImpl userServiceImpl;
     private final UserService userService;
+    private final CourseServiceImpl courseService;
 
 
     private final PasswordEncoder passwordEncoder;
-    private final CourseService courseService;
+
+
+    @GetMapping("/user")
+    public String UserPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        modelMap.addAttribute("user", currentUser.getUsername());
+        return "user";
+    }
 
     @GetMapping("/users")
-    public String users(ModelMap modelMap) {
-        List<User> all = userService.findAll();
-        modelMap.addAttribute("users", all);
-       return "users";
+    public String users(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        List<User> allUsers = userServiceImpl.findAll();
+        modelMap.addAttribute("allUsers", allUsers);
+        List<User> all = userService.findUserByCourseId(currentUser.getUser().getId());
+        if (currentUser.getUser().getUserType() == UserType.LECTURER) {
+            return "lecturer";
+        } else {
+            return "users";
+        }
+
+
 
     }
 
-
-
-
     @GetMapping("/addUser")
-    public String addUser(ModelMap modelMap) {
-        List<Course> all1 = courseService.findAll();
-        modelMap.addAttribute("courses", all1);
+    public String addUser(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        List<Course> all = courseService.findAll();
+        modelMap.addAttribute("course", all);
         return "addUser";
     }
 
-    @PostMapping("/admin/addUser")
-    public String addUserPost(@ModelAttribute User user) {
+    @PostMapping("/addUser")
+    public String addUser(@ModelAttribute User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.save(user);
-        return "redirect:/users";
+        userService.addUser(user);
+        return "redirect:/addUser";
     }
 
 
     @GetMapping("/userDelete")
     public String deleteUser(@RequestParam int id) {
         userService.deleteById(id);
-        return "redirect:/users";
+        return "redirect:/user";
     }
 
 }

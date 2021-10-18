@@ -24,14 +24,14 @@ public class MessageController {
         private final UserService userService;
         private final MessageService messageService;
 
-        @GetMapping("/sendMessage")
+        @GetMapping("/messages")
         public String getAllUsers(ModelMap modelMap){
             List<User> all = userService.findAll();
             modelMap.addAttribute("users",all);
             return "messages";
 
         }
-        @GetMapping("/allMessages")
+        @GetMapping("/showMessages")
         public String getAllMessages(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
             List<Message> all = messageService.findAllMessagesByToId(currentUser.getUser().getId());
             modelMap.addAttribute("messages", all);
@@ -39,11 +39,11 @@ public class MessageController {
             return "showMessages";
         }
 
-        @PostMapping("/sendMessage")
+        @PostMapping("/messages")
         public String sendMessage(@ModelAttribute Message message, @AuthenticationPrincipal CurrentUser currentUser) {
-            message.setToUserId(currentUser.getUser());
+            message.setToUser(currentUser.getUser());
             messageService.save(message);
-            return "redirect:/users";
+            return "redirect:/messages";
 
         }
 }

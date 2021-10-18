@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/users/**")
-                .permitAll()
+                .hasAnyAuthority("LECTURER", "ADMIN", "STUDENT")
                 .antMatchers(HttpMethod.GET, "/addUser")
 //                .hasAnyAuthority("ADMIN")
                 .permitAll()

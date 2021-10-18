@@ -7,7 +7,7 @@
 <body>
 <a href="/logout">logout</a><br>
 <br>
- <a href="/addUser"> Add User</a><br>
+Employee Page |  <a href="/addUser"> Add Employee</a><br>
 <!--Send Message <a href="/sendMessage"> send message</a><br>-->
 
 <table border="1">
@@ -19,22 +19,17 @@
         <th>age</th>
         <th>phoneNumber</th>
         <th>address</th>
-        <th>UserType</th>
         <th>Course</th>
-        <th>Delete</th>
-        <th>edit</th>
     </tr>
-    <tr th:each="all: ${users}">
-        <td th:text="${all.id}"></td>
-        <td th:text="${all.name}"></td>
-        <td th:text="${all.surname}"></td>
-        <td th:text="${all.email}"></td>
-        <td th:text="${all.age}"></td>
-        <td th:text="${all.phoneNum}"></td>
-        <td th:text="${all.address}"></td>
-        <td th:text="${all.userType}"></td>
-        <td th:text="${all.course}"></td>-->
-        <td><a th:href="@{/userDelete(id=${all.getId()})}">Delete</a></td>
+    <tr th:each="allUsers: ${allUsers}">
+        <td th:text="${allUsers.id}"></td>
+        <td th:text="${allUsers.name}"></td>
+        <td th:text="${allUsers.surname}"></td>
+        <td th:text="${allUsers.email}"></td>
+        <td th:text="${allUsers.age}"></td>
+        <td th:text="${allUsers.phone_num}"></td>
+        <td th:text="${allUsers.address}"></td>
+        <td th:text="${allUsers.course.name}"></td>
 
     </tr>
 

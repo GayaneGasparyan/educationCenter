@@ -6,16 +6,16 @@
 </head>
 <body>
 <a href="/sendMessages">send message</a>
-<a href="/showMessages">Show all messages</a>
-
+<table border="1">
 <tr>
     <th>From</th>
     <th>Message</th>
 </tr>
 
 <tr th:each="message:${messages}">
-    <td th:text="${message.getToUserId()}"></td>
+    <td th:text="${message.user.name}"></td>
     <td th:text="${message.message}"></td>
 </tr>
+</table>
 </body>
 </html>

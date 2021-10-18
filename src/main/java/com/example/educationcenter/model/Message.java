@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "message")
+@Table(name = "massage")
 
 public class Message {
 
@@ -22,8 +22,10 @@ public class Message {
     private int id;
 
     @ManyToOne
-    private User toUserId;
+    @JoinColumn(name="to_id")
+    private User toUser;
     @ManyToOne
-    private User fromUserId;
+    @JoinColumn(name="from_id")
+    private User user;
     private String message;
 }
