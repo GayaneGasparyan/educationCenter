@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -28,36 +29,46 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final CourseService courseService;
 
-    @GetMapping("/users")
-    public String users(ModelMap modelMap) {
-        List<User> all = userService.findAll();
-        modelMap.addAttribute("users", all);
-       return "users";
 
-    }
-
-
-
-
-    @GetMapping("/addUser")
-    public String addUser(ModelMap modelMap) {
-        List<Course> all1 = courseService.findAll();
-        modelMap.addAttribute("courses", all1);
-        return "addUser";
-    }
-
-    @PostMapping("/admin/addUser")
-    public String addUserPost(@ModelAttribute User user) {
+    @PostMapping("/admin/addUsers")
+    public String addLecturersPost(@ModelAttribute User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
+
+    @GetMapping("/admin")
+    public String adminGet(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        List<User> user = userService.findAll();
+        modelMap.addAttribute("users", user);
+        List<Course> courseList = courseService.findAll();
+        modelMap.addAttribute("courses", courseList);
+        return "admin";
+    }
 
     @GetMapping("/userDelete")
     public String deleteUser(@RequestParam int id) {
         userService.deleteById(id);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
-}
+
+    @PostMapping(value = "/user/update")
+    public String update(@ModelAttribute("user") User user, @RequestParam("id") int id) {
+        user.setId(id);
+        userService.save(user);
+        return "redirect:/admin";
+    }
+
+
+    @GetMapping(value = "/studentUpdate")
+    public String changeUserData(@RequestParam("id") int id, ModelMap map) {
+        Optional<User> one = userService.findOne(id);
+        map.addAttribute("user", one);
+        map.addAttribute("users", userService.findAll());
+        return "studentUpdate";
+    }
+
+
+ }

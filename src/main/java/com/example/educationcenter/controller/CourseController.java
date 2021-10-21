@@ -29,7 +29,7 @@ public class CourseController {
 
     @GetMapping("/addCourse")
     public String addCourse() {
-        return "addCourse";
+        return "courses";
     }
 
     @PostMapping("/addCourse")

@@ -23,6 +23,8 @@ public class SecurityService implements UserDetailsService {
             throw new UsernameNotFoundException("User with " + s + " username does not exists");
         }
 
+
+
         return new CurrentUser(byEmail.get());
     }
 }

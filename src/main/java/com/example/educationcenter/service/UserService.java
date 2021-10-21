@@ -12,13 +12,13 @@ public interface UserService {
 
     void deleteById(int id);
 
-    void addUser(User user);
-
     Optional<User> findByEmail(String email);
-
-    List<User> findUserByCourseId(int id);
 
     void deleteAllByCourseId(int id);
 
     void save(User user);
+
+
+    Optional<User> findOne(int id);
 }
+

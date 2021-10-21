@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/logout">logout</a><br>
+<br>
+<br>
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>surname</th>
+        <th>email</th>
+        <th>age</th>
+        <th>phoneNumber</th>
+        <th>address</th>
+        <th>Course</th>
+        <th>UserType</th>
+        <th>Edit</th>
+        <th>Delete</th>
+
+
+    </tr>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.phoneNum}"></td>
+        <td th:text="${user.address}"></td>
+        <td th:text="${user.course}"></td>
+        <td th:text="${user.userType}"></td>
+        <td><a th:href="@{/studentUpdate(id=${user.getId()})}">EDIT</a></td>
+        <td><a th:href="@{/userDelete(id=${user.getId()})}">Delete</a></td>
+
+    </tr>
+    <br></table>
+    <br>
+    <br>
+    <form action="/admin/addUsers" method="post">
+        <input type="text" name="name" placeholder="name"><br>
+        <input type="text" name="surname" placeholder="surname"><br>
+        <input type="text"name="email" placeholder="email"><br>
+        <input type="text" name="age" placeholder="age"><br>
+        <input type="password" name="password" placeholder="password"><br>
+        <input type="text" name="phoneNum" placeholder="phoneNumber"><br>
+        <input type="text" name="address" placeholder="address"><br>
+        UserType: <select name="userType">
+        <option value="LECTURER">LECTURER</option>
+        <option value="STUDENT">STUDENT</option>
+    </select>
+        COURSE: <select name="course.id">
+        <option th:each="course: ${courses}"
+                th:text="${course.name}"
+                th:value="${course.id}">
+        </option>
+    </select>
+        <input type="submit" value="Add">
+    </form>
+
+<br>
+<br>
+</body>
+</html>
