@@ -65,7 +65,7 @@ public class UserController {
     @GetMapping(value = "/studentUpdate")
     public String changeUserData(@RequestParam("id") int id, ModelMap map) {
         Optional<User> one = userService.findOne(id);
-        map.addAttribute("user", one);
+        map.addAttribute("user", one );
         map.addAttribute("users", userService.findAll());
         return "studentUpdate";
     }
