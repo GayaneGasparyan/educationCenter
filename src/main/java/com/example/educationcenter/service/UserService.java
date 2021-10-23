@@ -21,4 +21,6 @@ public interface UserService {
     void deleteAllByCourseId(int id);
 
     void save(User user);
+
+    List<User> findAllByCourseId(int id);
 }

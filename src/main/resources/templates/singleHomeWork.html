@@ -8,8 +8,7 @@
 <h3 th:text="${homeWork.name}"></h3>
 <table border="1px">
     <tr th:each="comment: ${comments}">
-        <td th:text="${comments.text}"></td>
-        <td th:text="${comments.com}"></td>
+        <td th:text="${comment.comment}"></td>
         <td th:text="${comment.user.name}" ></td>
     </tr><br>
 
