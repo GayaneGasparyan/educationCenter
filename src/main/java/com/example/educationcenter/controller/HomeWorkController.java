@@ -29,11 +29,11 @@ public class HomeWorkController {
         return "addHomeWork";
     }
 
-    @GetMapping("/homeWorks")
+    @GetMapping("/myHomeWorks")
     public String viewHomeWorks(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        List<HomeWork> all = homeWorkService.findAllByUserId(currentUser.getUser().getCourse().getId());
+        List<HomeWork> all = homeWorkService.findAllByUserId(currentUser.getUser().getId());
         modelMap.addAttribute("homeWorks", all);
-        return "homeWorks";
+        return "myHomeWorks";
     }
     @PostMapping("/addHomeWork")
     public String addHomeWork(@AuthenticationPrincipal CurrentUser currentUser,@ModelAttribute HomeWork homeWork) {
