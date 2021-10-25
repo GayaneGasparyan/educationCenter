@@ -7,7 +7,7 @@
 <body>
 <a href="/logout">Logout</a><br>
 <a href="/">Home</a><br>
-Companies page | <a href="/addCourse">Add Course</a>
+
 <table border="1">
     <tr>
         <th>id</th>
@@ -23,5 +23,13 @@ Companies page | <a href="/addCourse">Add Course</a>
 
     </tr>
 </table>
+
+
+
+<form action="/addCourse" method="post">
+    <input type="text" name="name" placeholder="name"><br>
+    <input type="text"name="duration" placeholder="duration"><br>
+    <input type="submit" value="Add">
+</form>
 </body>
 </html>
