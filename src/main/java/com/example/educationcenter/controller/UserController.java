@@ -29,7 +29,6 @@ public class UserController {
 
 
     private final PasswordEncoder passwordEncoder;
-    private final CourseService courseService;
 
 
     @GetMapping("/user")
@@ -42,7 +41,7 @@ public class UserController {
     public String users(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         List<User> allUsers = userServiceImpl.findAll();
         modelMap.addAttribute("allUsers", allUsers);
-        List<User> all = userService.findUserByCourseId(currentUser.getUser().getId());
+        List<User> all = userService.findAllByCourseId(currentUser.getUser().getId());
         if (currentUser.getUser().getUserType() == UserType.LECTURER) {
             return "lecturer";
         } else {
