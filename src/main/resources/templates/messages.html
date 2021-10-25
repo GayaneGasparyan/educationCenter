@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/sendMessage" method="post">
+<form action="/messages" method="post">
     <textarea  name="message"> </textarea><br>
-    <select name="toUserId.id">
+    <select name="user.id">
         <option th:each="user:${users}" th:text="${user.name}" th:value="${user.id}"></option>
     </select><br>
     <input type="submit" value="add">
