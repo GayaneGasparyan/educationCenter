@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -28,6 +29,7 @@ public class UserController {
 
 
     private final PasswordEncoder passwordEncoder;
+    private final CourseService courseService;
 
 
     @GetMapping("/user")
@@ -61,15 +63,50 @@ public class UserController {
     @PostMapping("/addUser")
     public String addUser(@ModelAttribute User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.addUser(user);
-        return "redirect:/addUser";
+        userService.save(user);
+        return "redirect:/users";
     }
 
+
+
+    @PostMapping("/admin/addUsers")
+    public String addLecturersPost(@ModelAttribute User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.save(user);
+        return "redirect:/admin";
+    }
+
+
+    @GetMapping("/admin")
+    public String adminGet(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        List<User> user = userService.findAll();
+        modelMap.addAttribute("users", user);
+        List<Course> courseList = courseService.findAll();
+        modelMap.addAttribute("courses", courseList);
+        return "admin";
+    }
 
     @GetMapping("/userDelete")
     public String deleteUser(@RequestParam int id) {
         userService.deleteById(id);
-        return "redirect:/user";
+        return "redirect:/admin";
+    }
+
+
+    @PostMapping(value = "/user/update")
+    public String update(@ModelAttribute("user") User user, @RequestParam("id") int id) {
+        user.setId(id);
+        userService.save(user);
+        return "redirect:/admin";
+    }
+
+
+    @GetMapping(value = "/studentUpdate")
+    public String changeUserData(@RequestParam("id") int id, ModelMap map) {
+        Optional<User> one = userService.findOne(id);
+        map.addAttribute("user", one );
+        map.addAttribute("users", userService.findAll());
+        return "studentUpdate";
     }
 
 }

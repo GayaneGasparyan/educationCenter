@@ -32,7 +32,7 @@ public class OnApplicationStartEvent implements ApplicationListener<ApplicationR
 
             Course course = courseRepository.save(Course.builder()
                     .name("Default course")
-                    .duration("address")
+                    .duration("java")
                     .build());
             userRepository.save(User.builder()
                     .email("admin@mail.com")
