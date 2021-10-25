@@ -42,11 +42,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteAllByCourseId(int id) {
-
+        userRepository.deleteAllByCourseId(id);
     }
 
     @Override
     public void save(User user) {
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public List<User> findAllByCourseId(int id) {
+      return   userRepository.findAllByCourseId();
 
     }
 }
