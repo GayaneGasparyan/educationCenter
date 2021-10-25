@@ -1,10 +1,13 @@
 package com.example.educationcenter.controller;
 
 import com.example.educationcenter.model.Course;
+import com.example.educationcenter.model.User;
+import com.example.educationcenter.security.CurrentUser;
 import com.example.educationcenter.service.CourseService;
 import com.example.educationcenter.service.UserService;
 import com.example.educationcenter.service.impl.CourseServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +28,12 @@ public class CourseController {
         List<Course> all = courseService.findAll();
         modelMap.addAttribute("courses", all);
         return "courses";
+    }
+    @GetMapping("/myCourse")
+    public String getMyCourse(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        List<User> all = userService.findAllByCourseId(currentUser.getUser().getCourse().getId());
+        modelMap.addAttribute("users", all);
+        return "myCourse";
     }
 
     @GetMapping("/addCourse")

@@ -49,6 +49,13 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findOne(int id) {
      return   userRepository.findOneById(id);
 
+        userRepository.save(user);
+    }
+
+    @Override
+    public List<User> findAllByCourseId(int id) {
+      return   userRepository.findAllByCourseId();
+
     }
 
 }

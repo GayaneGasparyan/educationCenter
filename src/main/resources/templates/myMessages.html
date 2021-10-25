@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" >
     <title>Title</title>
 </head>
 <body>
-<a href="/sendMessages">send message</a>
-<a href="/showMessages">Show all messages</a>
+<a href="/sendMessage">send message</a>
+<a href="/myMessages">Show my messages</a>
 
 <tr>
     <th>From</th>
@@ -14,7 +14,7 @@
 </tr>
 
 <tr th:each="message:${messages}">
-    <td th:text="${message.getToUserId()}"></td>
+    <td th:text="${message.fromUserId.name}"></td>
     <td th:text="${message.message}"></td>
 </tr>
 </body>
