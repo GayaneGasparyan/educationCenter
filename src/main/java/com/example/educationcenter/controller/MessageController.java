@@ -3,10 +3,8 @@ package com.example.educationcenter.controller;
 import com.example.educationcenter.model.Message;
 import com.example.educationcenter.model.User;
 import com.example.educationcenter.security.CurrentUser;
-import com.example.educationcenter.service.MessageService;
 import com.example.educationcenter.service.UserService;
 import com.example.educationcenter.service.impl.MessageServiceImpl;
-import com.example.educationcenter.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,29 +19,30 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MessageController {
 
-        private final UserService userService;
-        private final MessageServiceImpl messageService;
+    private final UserService userService;
+    private final MessageServiceImpl messageService;
 
-        @GetMapping("/messages")
-        public String getAllUsers(ModelMap modelMap){
-            List<User> all = userService.findAll();
-            modelMap.addAttribute("users",all);
-            return "messages";
+    @GetMapping("/messages")
+    public String getAllUsers(ModelMap modelMap) {
+        List<User> all = userService.findAll();
+        modelMap.addAttribute("users", all);
+        return "messages";
 
-        }
-        @GetMapping("/showMessages")
-        public String getAllMessages(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-            List<Message> all = messageService.findAllMessagesByToId(currentUser.getUser().getId());
-            modelMap.addAttribute("messages", all);
+    }
 
-            return "showMessages";
-        }
+    @GetMapping("/showMessages")
+    public String getAllMessages(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        List<Message> all = messageService.findAllMessagesByToId(currentUser.getUser().getId());
+        modelMap.addAttribute("messages", all);
 
-        @PostMapping("/messages")
-        public String sendMessage(@ModelAttribute Message message, @AuthenticationPrincipal CurrentUser currentUser) {
-            message.setUser(currentUser.getUser());
-            messageService.save(message);
-            return "redirect:/messages";
+        return "showMessages";
+    }
 
-        }
+    @PostMapping("/messages")
+    public String sendMessage(@ModelAttribute Message message, @AuthenticationPrincipal CurrentUser currentUser) {
+        message.setUser(currentUser.getUser());
+        messageService.save(message);
+        return "redirect:/messages";
+
+    }
 }

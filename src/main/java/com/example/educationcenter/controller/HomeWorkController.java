@@ -1,17 +1,11 @@
 package com.example.educationcenter.controller;
 
 import com.example.educationcenter.model.Comment;
-import com.example.educationcenter.model.Course;
 import com.example.educationcenter.model.HomeWork;
-import com.example.educationcenter.model.Message;
 import com.example.educationcenter.repository.CommentRepository;
-import com.example.educationcenter.repository.CourseRepository;
 import com.example.educationcenter.repository.HomeWorkRepository;
 import com.example.educationcenter.security.CurrentUser;
-import com.example.educationcenter.service.CommentService;
 import com.example.educationcenter.service.HomeWorkService;
-import com.example.educationcenter.service.impl.CommentServiceImpl;
-import com.example.educationcenter.service.impl.CourseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -28,9 +22,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class HomeWorkController {
     private final HomeWorkService homeWorkService;
-    private final CommentServiceImpl commentService;
-    private final CourseServiceImpl courseService;
-    private final CourseRepository courseRepository;
     private final HomeWorkRepository homeWorkRepository;
     private final CommentRepository commentRepository;
 
@@ -42,7 +33,7 @@ public class HomeWorkController {
 
     @PostMapping("/addHomeWork")
     public String addHomeWork(@ModelAttribute HomeWork homeWork, @AuthenticationPrincipal CurrentUser currentUser) {
-       homeWork.setCourse(currentUser.getUser().getCourse());
+        homeWork.setCourse(currentUser.getUser().getCourse());
         homeWorkService.save(homeWork);
         return "redirect:/homeWorks";
     }
@@ -54,13 +45,14 @@ public class HomeWorkController {
 
         return "homeWorks";
     }
+
     @GetMapping("/homeWorks/{id}")
-    public String singleHomWork(@PathVariable ("id") int id, ModelMap modelMap){
-        Optional<HomeWork> homeWork=homeWorkRepository.findHomeWorkById(id);
-        if(homeWork.isEmpty()){
+    public String singleHomWork(@PathVariable("id") int id, ModelMap modelMap) {
+        Optional<HomeWork> homeWork = homeWorkRepository.findHomeWorkById(id);
+        if (homeWork.isEmpty()) {
             return "redirect:/homeWorks";
         }
-        List<Comment> comments=commentRepository.findAllByHomework_id(id);
+        List<Comment> comments = commentRepository.findAllByHomework_id(id);
         modelMap.addAttribute("comments", comments);
         modelMap.addAttribute("homework", homeWork.get());
         return "singleHomeWork";

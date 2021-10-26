@@ -21,7 +21,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService commentService;
-    private final HomeWorkRepository homeWorkRepository;
 
 
     @PostMapping("/addComment")
