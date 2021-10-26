@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,8 +8,9 @@
 <form action="/addHomeWork" method="post">
     <input type="text" name="name" placeholder="name"><br>
     <input type="text" name="description" placeholder="description"><br>
-    <input type="date" name="deadline" placeholder="deadline"><br>
-    <input type="submit" value="Add">
+    <input type="date" name="${#dates.format(homeWorke.deadline,'MM-dd-yyyy'}" />
+
+        <input type="submit" value="Add">
 </form>
 </body>
 </html>

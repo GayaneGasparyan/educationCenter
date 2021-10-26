@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,6 +8,46 @@
 welcome lecturer
 <a href="/messages">massage</a>
 <a href="/showMessages">showmassage</a>
+<a href="/addHomeWork">addhomeWork</a>
+<a href="/homeWorks">homeWorks</a>
+<form action="/users" method="get">
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>surname</th>
+        <th>email</th>
+        <th>age</th>
+        <th>phoneNumber</th>
+        <th>address</th>
+        <th>Course</th>
+        <th>sendMassage</th>
+    </tr>
+    <tr th:each="allUsers: ${users}">
+        <td th:text="${allUsers.id}"></td>
+        <td th:text="${allUsers.name}"></td>
+        <td th:text="${allUsers.surname}"></td>
+        <td th:text="${allUsers.email}"></td>
+        <td th:text="${allUsers.age}"></td>
+        <td th:text="${allUsers.phoneNum}"></td>
+        <td th:text="${allUsers.address}"></td>
+        <td th:text="${allUsers.course.name}"></td>
+        <td ><a th:href="@{/messages/{id}(id=${allUsers.id})}" href ="#"><a href="/messages">massage</a>
+        </a>
 
+    </tr>
+
+
+
+</table>
+<!--    <form action="/homeWorks" method="get">-->
+<!--        <div th:each="homeWorks : ${homeWork}">-->
+<!--            <a th:href="@{/homeWorks/{id}(id=${homeWork.id})}"> <h3 th:text="${homeWork.name}"></h3> </a>-->
+<!--            <p th:text="${homeWorks.user.course.name}"></p>-->
+<!--            <p th:text="${homeWorks.deadline}" ></p>-->
+<!--            <textarea th:text="${homeWork.description}" ></textarea>-->
+<!--        </div>-->
+<!--    </form>-->
+</form>
 </body>
 </html>

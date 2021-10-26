@@ -21,7 +21,8 @@ public class MessageServiceImpl implements MessageService{
 
     @Override
     public void save(Message message) {
-        messageRepository.save(message);
+        Message save= messageRepository.save(message);
 
     }
+
 }

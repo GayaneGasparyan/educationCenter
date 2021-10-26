@@ -21,13 +21,13 @@ Employee Page |  <a href="/addUser"> Add Employee</a><br>
         <th>address</th>
         <th>Course</th>
     </tr>
-    <tr th:each="allUsers: ${allUsers}">
+    <tr th:each="allUsers: ${users}">
         <td th:text="${allUsers.id}"></td>
         <td th:text="${allUsers.name}"></td>
         <td th:text="${allUsers.surname}"></td>
         <td th:text="${allUsers.email}"></td>
         <td th:text="${allUsers.age}"></td>
-        <td th:text="${allUsers.phone_num}"></td>
+        <td th:text="${allUsers.phoneNum}"></td>
         <td th:text="${allUsers.address}"></td>
         <td th:text="${allUsers.course.name}"></td>
 

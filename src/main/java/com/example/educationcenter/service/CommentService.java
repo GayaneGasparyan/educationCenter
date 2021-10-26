@@ -8,5 +8,6 @@ public interface CommentService {
     void save(Comment comment);
 
 
-    List<Comment> getAllCommentsByHomeWorkId(int id);
+    List<Comment> findAllCommentsByHomeWorkId(int id);
+
 }

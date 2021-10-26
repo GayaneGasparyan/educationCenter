@@ -4,7 +4,6 @@ import com.example.educationcenter.model.Course;
 import com.example.educationcenter.model.User;
 import com.example.educationcenter.model.UserType;
 import com.example.educationcenter.security.CurrentUser;
-import com.example.educationcenter.service.UserService;
 import com.example.educationcenter.service.impl.CourseServiceImpl;
 import com.example.educationcenter.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserServiceImpl userServiceImpl;
-    private final UserService userService;
     private final CourseServiceImpl courseService;
 
 
@@ -31,25 +29,23 @@ public class UserController {
 
 
     @GetMapping("/user")
-    public String UserPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+    public String userPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         modelMap.addAttribute("user", currentUser.getUsername());
         return "user";
     }
 
     @GetMapping("/users")
     public String users(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        List<User> allUsers = userServiceImpl.findAll();
-        modelMap.addAttribute("allUsers", allUsers);
-        List<User> all = userService.findUserByCourseId(currentUser.getUser().getId());
+        List<User> all = userServiceImpl.findUserByCourseId(currentUser.getUser().getCourse().getId());
+        modelMap.addAttribute("users", all);
+
         if (currentUser.getUser().getUserType() == UserType.LECTURER) {
             return "lecturer";
         } else {
             return "users";
         }
-
-
-
     }
+
 
     @GetMapping("/addUser")
     public String addUser(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
@@ -58,17 +54,18 @@ public class UserController {
         return "addUser";
     }
 
+
     @PostMapping("/addUser")
     public String addUser(@ModelAttribute User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.addUser(user);
+        userServiceImpl.addUser(user);
         return "redirect:/addUser";
     }
 
 
     @GetMapping("/userDelete")
     public String deleteUser(@RequestParam int id) {
-        userService.deleteById(id);
+        userServiceImpl.deleteById(id);
         return "redirect:/user";
     }
 

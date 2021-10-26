@@ -13,10 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class HomeWorkServiceImpl implements HomeWorkService {
     private final HomeWorkRepository homeWorkRepository;
-    @Override
-    public List<HomeWork> findAllByUserId(int id) {
-        return homeWorkRepository.findAllByUser_Id(id);
-    }
+
 
     @Override
     public void save(HomeWork homeWork) {

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -32,7 +33,9 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void getById(int id) {
-        courseRepository.getById(id);
+    public Optional<Course> getById(int id) {
+       return courseRepository.findById(id);
+
     }
+
 }

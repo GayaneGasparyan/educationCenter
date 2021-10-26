@@ -22,7 +22,7 @@ import java.util.List;
 public class MessageController {
 
         private final UserService userService;
-        private final MessageService messageService;
+        private final MessageServiceImpl messageService;
 
         @GetMapping("/messages")
         public String getAllUsers(ModelMap modelMap){
@@ -41,7 +41,7 @@ public class MessageController {
 
         @PostMapping("/messages")
         public String sendMessage(@ModelAttribute Message message, @AuthenticationPrincipal CurrentUser currentUser) {
-            message.setToUser(currentUser.getUser());
+            message.setUser(currentUser.getUser());
             messageService.save(message);
             return "redirect:/messages";
 

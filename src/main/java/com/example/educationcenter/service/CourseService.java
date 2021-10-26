@@ -3,6 +3,7 @@ package com.example.educationcenter.service;
 import com.example.educationcenter.model.Course;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CourseService {
     List<Course> findAll();
@@ -11,5 +12,5 @@ public interface CourseService {
 
     void deleteById(int id);
 
-    void getById(int id);
+    Optional<Course> getById(int id);
 }
