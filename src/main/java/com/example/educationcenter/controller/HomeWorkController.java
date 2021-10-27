@@ -6,6 +6,7 @@ import com.example.educationcenter.repository.CommentRepository;
 import com.example.educationcenter.repository.HomeWorkRepository;
 import com.example.educationcenter.security.CurrentUser;
 import com.example.educationcenter.service.HomeWorkService;
+import com.example.educationcenter.service.impl.CommentServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ import java.util.Optional;
 public class HomeWorkController {
     private final HomeWorkService homeWorkService;
     private final HomeWorkRepository homeWorkRepository;
-    private final CommentRepository commentRepository;
+    private final CommentServiceImpl commentService;
 
     @GetMapping("/addHomeWork")
     public String addHomeWork() {
@@ -52,7 +53,7 @@ public class HomeWorkController {
         if (homeWork.isEmpty()) {
             return "redirect:/homeWorks";
         }
-        List<Comment> comments = commentRepository.findAllByHomework_id(id);
+        List<Comment> comments = commentService.findAllByHomework_id(id);
         modelMap.addAttribute("comments", comments);
         modelMap.addAttribute("homework", homeWork.get());
         return "singleHomeWork";
