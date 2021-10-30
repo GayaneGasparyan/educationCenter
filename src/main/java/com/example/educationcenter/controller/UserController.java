@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -57,7 +58,7 @@ public class UserController {
 
     @GetMapping("/admin")
     public String adminGet(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        modelMap.addAttribute("user", userService.getOne(currentUser.getId()));
+        modelMap.addAttribute("user", userServiceImpl.getOne(currentUser.getId()));
         List<User> user = userServiceImpl.findAll();
         modelMap.addAttribute("users", user);
         List<Course> courseList = courseService.findAll();
@@ -82,8 +83,8 @@ public class UserController {
 
     @GetMapping(value = "/studentUpdate")
     public String changeUserData(ModelMap map, @ModelAttribute("user") User user, @RequestParam("id") int id) {
-        Optional<User> one = userService.getOne(id);
-        map.addAttribute("users", userService.findAll());
+        Optional<User> one = userServiceImpl.getOne(id);
+        map.addAttribute("users", userServiceImpl.findAll());
         map.addAttribute("user", one.get());
 
         return "studentUpdate";
