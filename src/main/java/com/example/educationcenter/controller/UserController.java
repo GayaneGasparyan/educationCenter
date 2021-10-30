@@ -4,6 +4,7 @@ import com.example.educationcenter.model.Course;
 import com.example.educationcenter.model.User;
 import com.example.educationcenter.model.UserType;
 import com.example.educationcenter.security.CurrentUser;
+import com.example.educationcenter.service.UserService;
 import com.example.educationcenter.service.impl.CourseServiceImpl;
 import com.example.educationcenter.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -62,6 +63,15 @@ public class UserController {
         return "redirect:/addUser";
     }
 
+
+    @GetMapping("/admin")
+    public String adminGet(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        List<User> user = userService.findAll();
+        modelMap.addAttribute("users", user);
+        List<Course> courseList = courseService.findAll();
+        modelMap.addAttribute("courses", courseList);
+        return "admin";
+    }
 
     @GetMapping("/userDelete")
     public String deleteUser(@RequestParam int id) {

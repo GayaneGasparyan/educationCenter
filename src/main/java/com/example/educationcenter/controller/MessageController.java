@@ -44,5 +44,5 @@ public class MessageController {
         messageService.save(message);
         return "redirect:/messages";
 
-    }
+        }
 }
