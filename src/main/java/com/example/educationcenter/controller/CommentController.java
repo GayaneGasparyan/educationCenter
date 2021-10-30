@@ -9,18 +9,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Date;
-
 @Controller
 @RequiredArgsConstructor
 public class CommentController {
-    private  final CommentService commentService;
+    private final CommentService commentService;
 
 
     @PostMapping("/addComment")
-    public String addComment(@AuthenticationPrincipal CurrentUser currentUser, @ModelAttribute Comment comment) {
+    public String addComment(@ModelAttribute Comment comment, @AuthenticationPrincipal CurrentUser currentUser) {
         comment.setUser(currentUser.getUser());
         commentService.save(comment);
-        return "redirect:/homework/" + comment.getHome_work().getId();
+
+        return "redirect:/homeWorks/" + comment.getHomework().getId();
     }
+
+
 }

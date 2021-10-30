@@ -16,7 +16,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-
         return userRepository.findAll();
     }
 
@@ -25,16 +24,11 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-
-
     @Override
     public Optional<User> findByEmail(String email) {
 
-        return  userRepository.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
-
-
-
 
     @Override
     public void deleteAllByCourseId(int id) {
@@ -47,15 +41,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findOne(int id) {
-     return   userRepository.findOneById(id);
+    public List<User> findAllByCourseId(int id) {
+        return userRepository.findAllByCourseId(id);
     }
 
     @Override
-    public List<User> findAllByCourseId(int id) {
-      return   userRepository.findAllByCourseId();
-
+    public Optional<User> findOne(int id) {
+        return userRepository.findOneById(id);
     }
 
-}
 
+}

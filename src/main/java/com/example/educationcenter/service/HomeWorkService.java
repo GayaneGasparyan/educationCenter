@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HomeWorkService {
-    List<HomeWork> findAllByUserId(int id);
 
     void save(HomeWork homeWork);
 

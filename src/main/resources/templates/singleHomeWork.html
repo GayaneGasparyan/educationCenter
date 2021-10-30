@@ -5,19 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-<h3 th:text="${homeWork.name}"></h3>
-<table border="1px">
-    <tr th:each="comment: ${comments}">
+<h3 th:text ="${homework.name}"></h3>
+<table th:border="1px">
+    <tr th:each="comment:${comments}" style="border:black ">
         <td th:text="${comment.comment}"></td>
-        <td th:text="${comment.user.name}" ></td>
-    </tr><br>
+        <td th:text="${comment.user.name}"></td>
 
+    </tr></br>
 </table>
-<form action="/addComment" method="post">
-    <input type="hidden" th:value="${homeWork.id}" name="homeWork.id"><br>
-    <textarea  name="text" > </textarea><br>
-    <input type="submit" value="Add Comment">
-</form>
 
+</table >
+<form action="/addComment" method="post">
+    <input type="hidden" th:value="${homework.id}" name="homework.id">
+    <textarea name="comment" th:type="text"></textarea>
+    <input type="submit" value="add Comment">
+</form>
 </body>
 </html>

@@ -12,7 +12,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     void deleteAllByCourseId(int id);
 
-    List<User> findAllByCourseId();
+    List<User> findAllByCourseId(int id);
 
     Optional<User> findOneById(int id);
 }

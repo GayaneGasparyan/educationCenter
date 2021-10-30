@@ -20,10 +20,9 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @ManyToOne
     private User user;
     @ManyToOne
-    private HomeWork home_work;
+    private HomeWork homework;
     private String comment;
 }

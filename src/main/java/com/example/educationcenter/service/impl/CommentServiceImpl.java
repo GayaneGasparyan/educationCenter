@@ -20,8 +20,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> getAllCommentsByHomeWorkId(int id) {
-        return commentRepository.findAllByUserId(id);
+    public List<Comment> findAllByHomework_id(int id) {
+        return commentRepository.findAllByHomework_id(id);
     }
 
 
