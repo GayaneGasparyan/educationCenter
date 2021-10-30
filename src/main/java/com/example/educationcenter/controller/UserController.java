@@ -47,16 +47,8 @@ public class UserController {
     }
 
 
-    @GetMapping("/addUser")
-    public String addUser(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        List<Course> all = courseService.findAll();
-        modelMap.addAttribute("course", all);
-        return "addUser";
-    }
-
-
-    @PostMapping("/addUser")
-    public String addUser(@ModelAttribute User user) {
+    @PostMapping("/admin/addUser")
+    public String addLecturersPost(@ModelAttribute User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userServiceImpl.save(user);
         return "redirect:/addUser";
@@ -65,6 +57,7 @@ public class UserController {
 
     @GetMapping("/admin")
     public String adminGet(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        modelMap.addAttribute("user", userService.getOne(currentUser.getId()));
         List<User> user = userServiceImpl.findAll();
         modelMap.addAttribute("users", user);
         List<Course> courseList = courseService.findAll();
@@ -75,7 +68,26 @@ public class UserController {
     @GetMapping("/userDelete")
     public String deleteUser(@RequestParam int id) {
         userServiceImpl.deleteById(id);
-        return "redirect:/user";
+        return "redirect:/admin";
     }
 
-}
+
+//    @PostMapping(value = "/user/update")
+//    public String update(@ModelAttribute("user") User user, @RequestParam("id") int id) {
+//        user.setId(id);
+//        userService.save(user);
+//        return "redirect:/admin";
+//    }
+//
+
+    @GetMapping(value = "/studentUpdate")
+    public String changeUserData(ModelMap map, @ModelAttribute("user") User user, @RequestParam("id") int id) {
+        Optional<User> one = userService.getOne(id);
+        map.addAttribute("users", userService.findAll());
+        map.addAttribute("user", one.get());
+
+        return "studentUpdate";
+    }
+
+
+ }

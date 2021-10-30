@@ -21,6 +21,8 @@ public interface UserService {
     List<User> findAllByCourseId(int id);
 
 
-    Optional<User> findOne(int id);
+
+
+    Optional<User> getOne(int id);
 }
 
