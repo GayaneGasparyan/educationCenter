@@ -5,16 +5,17 @@
     <title>Title</title>
 </head>
 <body>
+<body>
 <p border="100">
 <form action="/homeWorks" method="get" th:border="1">
-<div th:each="homeWork : ${homeWorks}" th:border="1">
-     <h3 th:text="${homeWork.name}"></h3>
-    <p th:text="${homeWork.course.name}"></p>
-    <p th:text="${homeWork.deadline}" ></p>
-    <textarea th:text="${homeWork.description}" ></textarea>
-    <a th:href="@{/homeWorks/{id}(id=${homeWork.id})}"> <h3 >homework comment</h3>
-    </a>
-</div>
+    <div th:each="homeWork : ${homeWorks}" th:border="1">
+        <h3 th:text="${homeWork.name}"></h3>
+        <p th:text="${homeWork.course.name}"></p>
+        <p th:text="${homeWork.deadline}" ></p>
+        <textarea th:text="${homeWork.description}" ></textarea>
+        <a th:href="@{/homeWorks/{id}(id=${homeWork.id})}"> <h3 >homework comment</h3>
+        </a>
+    </div>
 </form>
 </p>
 

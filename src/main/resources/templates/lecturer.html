@@ -10,7 +10,10 @@ welcome lecturer
 <a href="/showMessages">showmassage</a>
 <a href="/addHomeWork">addhomeWork</a>
 <a href="/homeWorks">homeWorks</a>
-<form action="/users" method="get">
+<a href="/logout">logout</a><br>
+<a href="/">home</a><br>
+
+<form action="/lecturer" method="get">
 <table border="1">
     <tr>
         <th>id</th>
@@ -40,14 +43,7 @@ welcome lecturer
 
 
 </table>
-<!--    <form action="/homeWorks" method="get">-->
-<!--        <div th:each="homeWorks : ${homeWork}">-->
-<!--            <a th:href="@{/homeWorks/{id}(id=${homeWork.id})}"> <h3 th:text="${homeWork.name}"></h3> </a>-->
-<!--            <p th:text="${homeWorks.user.course.name}"></p>-->
-<!--            <p th:text="${homeWorks.deadline}" ></p>-->
-<!--            <textarea th:text="${homeWork.description}" ></textarea>-->
-<!--        </div>-->
-<!--    </form>-->
+
 </form>
 </body>
 </html>

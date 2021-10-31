@@ -40,10 +40,10 @@ public class MainController {
             return "redirect:/admin";
         }
         if (principal.getUser().getUserType() == UserType.LECTURER) {
-            return "redirect:/lecturers";
+            return "redirect:/lecturer";
         }
         if (principal.getUser().getUserType() == UserType.STUDENT) {
-            return "redirect:/students";
+            return "redirect:/student";
         }
         return "redirect:/";
     }

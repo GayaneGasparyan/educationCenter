@@ -35,7 +35,7 @@ public class MessageController {
         List<Message> all = messageService.findAllMessagesByToId(currentUser.getUser().getId());
         modelMap.addAttribute("messages", all);
 
-        return "showMessages";
+        return "myMessages";
     }
 
     @PostMapping("/messages")
