@@ -5,7 +5,6 @@ import com.example.educationcenter.model.User;
 import com.example.educationcenter.security.CurrentUser;
 import com.example.educationcenter.service.CourseService;
 import com.example.educationcenter.service.UserService;
-import com.example.educationcenter.service.impl.CourseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,7 @@ public class CourseController {
     public String getMyCourse(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         List<User> all = userService.findAllByCourseId(currentUser.getUser().getCourse().getId());
         modelMap.addAttribute("users", all);
-        return "myCourse";
+        return "myCoursee";
     }
 
     @GetMapping("/addCourse")

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/myHomeWorks" method="get" >
+<div th:each="homeWork : ${myHomeWorks}" >
+    <a th:href="@{/homeWorks/{id}(id=${homeWork.id})}"> <h3 th:text="${homeWork.name}"></h3> </a>
+    <p th:text="${homeWork.description}"></p>
+    <p th:text="${homeWork.deadline}" ></p>
+</div>
+</form>
+</body>
+</html>
