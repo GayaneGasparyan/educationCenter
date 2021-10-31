@@ -7,7 +7,7 @@
 <body>
 <form action="/sendMessage" method="post">
     <textarea  name="message"> </textarea><br>
-    <select name="toUser.id">
+    <select name="toId.id">
         <option th:each="user:${users}"
                 th:text="${user.name}" th:value="${user.id}"></option>
     </select><br>

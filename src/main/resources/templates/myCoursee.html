@@ -11,19 +11,20 @@ My Classmates
         <th>id</th>
         <th>name</th>
         <th>age</th>
-
+        <th>sendMassage</th>
     </tr>
     <tr th:each="user: ${users}">
         <td th:text="${user.getId}"></td>
         <td th:text="${user.getName()}"></td>
         <td th:text="${user.getAge()}" ></td>
-
-
-
+        <td ><a th:href="@{/messages/{id}(id=${user.id})}" href ="#"><a href="/sendMessages">massage</a>
+        </a>
     </tr>
+
+
 </table>
 </table>
-<a href="/sendMessage">send Message</a>
+
 <a href="/myMessages">Show all messages</a>
 
 </body>
