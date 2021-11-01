@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/sendMessage" method="post">
+<form action="/messages" method="post">
     <textarea  name="message"> </textarea><br>
     <select name="toId.id">
         <option th:each="user:${users}"

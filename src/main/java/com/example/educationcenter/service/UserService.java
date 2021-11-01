@@ -18,7 +18,7 @@ public interface UserService {
 
     void save(User user);
 
-    List<User> findAllByCourseId(int id);
+    List<User> findAllByCourseId(int courseId);
 
 
 

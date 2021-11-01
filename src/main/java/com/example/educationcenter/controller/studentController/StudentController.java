@@ -16,7 +16,7 @@ import java.util.List;
 public class StudentController {
     private final UserService userService;
 
-    @GetMapping("/myCoursee")
+    @GetMapping("/student")
     public String users(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         List<User> all = userService.findAllByCourseId(currentUser.getUser().getCourse().getId());
         modelMap.addAttribute("users", all);

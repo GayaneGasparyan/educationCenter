@@ -3,6 +3,7 @@ package com.example.educationcenter.controller;
 import com.example.educationcenter.model.Message;
 import com.example.educationcenter.model.User;
 import com.example.educationcenter.security.CurrentUser;
+import com.example.educationcenter.service.MessageService;
 import com.example.educationcenter.service.UserService;
 import com.example.educationcenter.service.impl.MessageServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ import java.util.List;
 public class MessageController {
 
     private final UserService userService;
-    private final MessageServiceImpl messageService;
+    private final MessageService messageService;
 
     @GetMapping("/messages")
     public String getAllUsers(ModelMap modelMap) {
@@ -32,7 +33,7 @@ public class MessageController {
 
     @GetMapping("/showMessages")
     public String getAllMessages(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        List<Message> all = messageService.findAllMessagesByToId(currentUser.getUser().getId());
+        List<Message> all = messageService.findAllMessagesByToUserId(currentUser.getUser().getId());
         modelMap.addAttribute("messages", all);
 
         return "myMessages";

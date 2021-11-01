@@ -9,6 +9,9 @@ public interface HomeWorkService {
 
     void save(HomeWork homeWork);
 
-    Optional<HomeWork> findHomeWorkById(int id);
+    List <HomeWork> findHomeWorkByUserId(int id);
 
+
+
+    Optional<HomeWork> findHomeWorkById(int id);
 }

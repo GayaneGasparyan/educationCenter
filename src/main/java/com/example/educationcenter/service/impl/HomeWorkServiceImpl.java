@@ -22,7 +22,14 @@ public class HomeWorkServiceImpl implements HomeWorkService {
     }
 
     @Override
+    public List<HomeWork> findHomeWorkByUserId(int id) {
+        return homeWorkRepository.findHomeWorkByUser_Course_Id(id);
+    }
+
+    @Override
     public Optional<HomeWork> findHomeWorkById(int id) {
         return homeWorkRepository.findHomeWorkById(id);
     }
+
+
 }

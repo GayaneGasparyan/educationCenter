@@ -15,8 +15,8 @@ public class MessageServiceImpl implements MessageService{
     private final MessageRepository messageRepository;
 
     @Override
-    public List<Message> findAllMessagesByToId(int id) {
-        return messageRepository.findAllByToUser_id(id);
+    public List<Message> findAllMessagesByToUserId(int id) {
+        return messageRepository.findAllMessagesByToUserId(id);
     }
 
     @Override

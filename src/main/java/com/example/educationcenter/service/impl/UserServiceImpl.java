@@ -46,8 +46,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllByCourseId(int id) {
-        return userRepository.findAllByCourseId(id);
+    public List<User> findAllByCourseId(int courseId) {
+        return userRepository.findAllByCourseId(courseId);
     }
 
     @Override

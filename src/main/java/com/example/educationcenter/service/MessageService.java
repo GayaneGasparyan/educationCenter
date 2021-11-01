@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MessageService {
 
-    List<Message> findAllMessagesByToId(int id);
+    List<Message> findAllMessagesByToUserId(int id);
 
 
     void save(Message message);
