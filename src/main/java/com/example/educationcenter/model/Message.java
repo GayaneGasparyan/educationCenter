@@ -27,5 +27,5 @@ public class Message {
     @ManyToOne
     @JoinColumn(name="from_id")
     private User user;
-    private String message;
+    private String letter;
 }

@@ -23,7 +23,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final UserService userServiceImpl;
     private final CourseService courseService;
 
 
@@ -54,7 +53,7 @@ public class UserController {
 
     @GetMapping("/admin")
     public String adminGet(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        modelMap.addAttribute("user", userServiceImpl.getOne(currentUser.getId()));
+        modelMap.addAttribute("user", userService.getOne(currentUser.getUser().getId()));
         List<User> user = userService.findAll();
         modelMap.addAttribute("users", user);
         List<Course> courseList = courseService.findAll();
@@ -69,18 +68,11 @@ public class UserController {
     }
 
 
-//    @PostMapping(value = "/user/update")
-//    public String update(@ModelAttribute("user") User user, @RequestParam("id") int id) {
-//        user.setId(id);
-//        userService.save(user);
-//        return "redirect:/admin";
-//    }
-//
 
     @GetMapping(value = "/studentUpdate")
     public String changeUserData(ModelMap map, @ModelAttribute("user") User user, @RequestParam("id") int id) {
-        Optional<User> one = userServiceImpl.getOne(id);
-        map.addAttribute("users", userServiceImpl.findAll());
+        Optional<User> one = userService.getOne(id);
+        map.addAttribute("users", userService.findAll());
         map.addAttribute("user", one.get());
 
         return "studentUpdate";

@@ -43,7 +43,7 @@ public class MessageController {
     public String send(@ModelAttribute Message message, @AuthenticationPrincipal CurrentUser currentUser) {
         message.setUser(currentUser.getUser());
         messageService.save(message);
-        return "redirect:/messages";
+        return "redirect:/myCourse";
 
         }
 }

@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/sendMessages">send message</a>
+<a href="/message">send message</a>
 
 <table border="1">
 <tr>
@@ -15,7 +15,7 @@
 
 <tr th:each="message:${messages}">
     <td th:text="${message.user.name}"></td>
-    <td th:text="${message.message}"></td>
+    <td th:text="${message.letter}"></td>
 </tr>
 </table>
 </body>

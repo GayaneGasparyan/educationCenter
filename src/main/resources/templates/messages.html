@@ -6,8 +6,8 @@
 </head>
 <body>
 <form action="/message" method="post">
-    <textarea  name="message"> </textarea><br>
-    <select name="toId.id">
+    <textarea  name="letter"> </textarea><br>
+    <select name="toUser.id">
         <option th:each="user:${users}"
                 th:text="${user.name}"
                 th:value="${user.id}"></option>
@@ -16,6 +16,10 @@
 
 
 
+
+
 </form>
+
+<a href="/showMessages">Show all messages</a>
 </body>
 </html>

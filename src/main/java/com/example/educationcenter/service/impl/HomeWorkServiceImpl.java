@@ -21,14 +21,15 @@ public class HomeWorkServiceImpl implements HomeWorkService {
         homeWorkRepository.save(homeWork);
     }
 
-    @Override
-    public List<HomeWork> findHomeWorkByUserId(int id) {
-        return homeWorkRepository.findHomeWorkByUser_Course_Id(id);
-    }
 
     @Override
     public Optional<HomeWork> findHomeWorkById(int id) {
         return homeWorkRepository.findHomeWorkById(id);
+    }
+
+    @Override
+    public List<HomeWork> findByCourse_id(int id) {
+        return homeWorkRepository.findByCourse_id(id);
     }
 
 

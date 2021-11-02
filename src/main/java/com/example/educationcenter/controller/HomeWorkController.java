@@ -23,7 +23,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class HomeWorkController {
     private final HomeWorkService homeWorkService;
-    private final HomeWorkRepository homeWorkRepository;
     private final CommentServiceImpl commentService;
 
     @GetMapping("/addHomeWork")
@@ -41,7 +40,7 @@ public class HomeWorkController {
 
     @GetMapping("/homeWorks")
     public String getAllHomeWorks(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        List<HomeWork> all = homeWorkRepository.findByCourse_id(currentUser.getUser().getCourse().getId());
+        List<HomeWork> all = homeWorkService.findByCourse_id(currentUser.getUser().getCourse().getId());
         modelMap.addAttribute("homeWorks", all);
 
         return "homeWorks";
@@ -49,7 +48,7 @@ public class HomeWorkController {
 
     @GetMapping("/homeWorks/{id}")
     public String singleHomWork(@PathVariable("id") int id, ModelMap modelMap) {
-        Optional<HomeWork> homeWork = homeWorkRepository.findHomeWorkById(id);
+        Optional<HomeWork> homeWork = homeWorkService.findHomeWorkById(id);
         if (homeWork.isEmpty()) {
             return "redirect:/homeWorks";
         }

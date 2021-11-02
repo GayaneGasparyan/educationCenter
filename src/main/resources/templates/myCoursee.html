@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-My Classmates ,<a href="/myHomeWorks"> My HomeWorks </a>
+My Classmates  <a href="/homeWorks">homeWorks</a>  <a href="/showMessages">Show all messages</a>
 <table border="1">
     <form action="/student" method="get">
     <tr>
@@ -18,7 +18,7 @@ My Classmates ,<a href="/myHomeWorks"> My HomeWorks </a>
         <td th:text="${user.getId}"></td>
         <td th:text="${user.getName()}"></td>
         <td th:text="${user.getAge()}" ></td>
-        <td ><a th:href="@{/messages/{id}(id=${user.id})}" href ="#"><a href="/sendMessages">massage</a>
+        <td ><a th:href="@{/messages/{id}(id=${user.id})}" href ="#"><a href="/messages">massage</a>
         </a>
     </tr>
 
@@ -26,7 +26,7 @@ My Classmates ,<a href="/myHomeWorks"> My HomeWorks </a>
 </table>
 </table>
 
-<a href="/myMessages">Show all messages</a>
+
 
 </body>
 </html>
