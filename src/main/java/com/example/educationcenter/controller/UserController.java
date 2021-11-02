@@ -23,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final UserService userServiceImpl;
     private final CourseService courseService;
 
 
@@ -39,12 +40,7 @@ public class UserController {
     public String users(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         List<User> all = userService.findAllByCourseId(currentUser.getUser().getCourse().getId());
         modelMap.addAttribute("users", all);
-
-        if (currentUser.getUser().getUserType() == UserType.LECTURER) {
-            return "lecturer";
-        } else {
-            return "users";
-        }
+        return "users";
     }
 
 
@@ -52,13 +48,13 @@ public class UserController {
     public String addLecturersPost(@ModelAttribute User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
-        return "redirect:/addUser";
+        return "redirect:/users";
     }
 
 
     @GetMapping("/admin")
     public String adminGet(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        modelMap.addAttribute("user", userService.getOne(currentUser.getId()));
+        modelMap.addAttribute("user", userServiceImpl.getOne(currentUser.getId()));
         List<User> user = userService.findAll();
         modelMap.addAttribute("users", user);
         List<Course> courseList = courseService.findAll();
@@ -83,8 +79,8 @@ public class UserController {
 
     @GetMapping(value = "/studentUpdate")
     public String changeUserData(ModelMap map, @ModelAttribute("user") User user, @RequestParam("id") int id) {
-        Optional<User> one = userService.getOne(id);
-        map.addAttribute("users", userService.findAll());
+        Optional<User> one = userServiceImpl.getOne(id);
+        map.addAttribute("users", userServiceImpl.findAll());
         map.addAttribute("user", one.get());
 
         return "studentUpdate";

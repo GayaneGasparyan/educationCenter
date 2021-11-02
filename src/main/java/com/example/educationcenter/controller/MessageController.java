@@ -39,8 +39,8 @@ public class MessageController {
         return "myMessages";
     }
 
-    @PostMapping("/messages")
-    public String sendMessage(@ModelAttribute Message message, @AuthenticationPrincipal CurrentUser currentUser) {
+    @PostMapping("/message")
+    public String send(@ModelAttribute Message message, @AuthenticationPrincipal CurrentUser currentUser) {
         message.setUser(currentUser.getUser());
         messageService.save(message);
         return "redirect:/messages";

@@ -5,11 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/messages" method="post">
+<form action="/message" method="post">
     <textarea  name="message"> </textarea><br>
     <select name="toId.id">
         <option th:each="user:${users}"
-                th:text="${user.name}" th:value="${user.id}"></option>
+                th:text="${user.name}"
+                th:value="${user.id}"></option>
     </select><br>
     <input type="submit" value="add">
 
