@@ -24,5 +24,5 @@ public class Comment {
     private User user;
     @ManyToOne
     private HomeWork homework;
-    private String comment;
+    private String comment_;
 }
