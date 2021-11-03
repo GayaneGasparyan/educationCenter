@@ -7,7 +7,33 @@
 <body>
 <a href="/logout">logout</a><br>
 <br>
-<br>
+<!-- <a href="/admin/addUser"> Add user</a><br>-->
+
+
+
+<form action="/admin/addUser" method="post">
+    <input type="text" name="name" placeholder="name"><br>
+    <input type="text" name="surname" placeholder="surname"><br>
+    <input type="text"name="email" placeholder="email"><br>
+    <input type="password" name="password" placeholder="password"><br>
+    <input type="text" name="phoneNum" placeholder="phoneNumber"><br>
+    <input type="text" name="address" placeholder="address"><br>
+    <input type="text" name="age" placeholder="age"><br>
+
+    UserType: <select name="userType">
+    <option value="LECTURER">LECTURER</option>
+    <option value="STUDENT">STUDENT</option>
+</select>
+    <select name="course.id">
+        <option
+                th:each="course:${courses}"
+                th:text="${course.name}"
+                th:value="${course.id}">
+        </option>
+    </select>
+    <input type="submit" value="Add">
+
+</form>
 <table border="1">
     <tr>
         <th>id</th>
@@ -18,51 +44,28 @@
         <th>phoneNumber</th>
         <th>address</th>
         <th>Course</th>
-        <th>UserType</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>USERTYPE</th>
+        <th>DELETE</th>
+        <th>EDIT</th>
+
+    </tr>
+    <tr th:each="allUsers: ${users}">
+        <td th:text="${allUsers.id}"></td>
+        <td th:text="${allUsers.name}"></td>
+        <td th:text="${allUsers.surname}"></td>
+        <td th:text="${allUsers.email}"></td>
+        <td th:text="${allUsers.age}"></td>
+        <td th:text="${allUsers.phoneNum}"></td>
+        <td th:text="${allUsers.address}"></td>
+        <td th:text="${allUsers.course}"></td>
+        <td th:text="${allUsers.userType}"></td>
+        <td><a th:href="@{/userDelete(id=${allUsers.getId()})}">DELETE</a></td>
+        <td><a th:href="@{/studentUpdate(id=${allUsers.getId()})}">EDIT</a></td>
 
 
     </tr>
-    <tr th:each="user: ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.name}"></td>
-        <td th:text="${user.surname}"></td>
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.age}"></td>
-        <td th:text="${user.phoneNum}"></td>
-        <td th:text="${user.address}"></td>
-        <td th:text="${user.course}"></td>
-        <td th:text="${user.userType}"></td>
-        <td><a th:href="@{/studentUpdate(id=${user.getId()})}">EDIT</a></td>
-        <td><a th:href="@{/userDelete(id=${user.getId()})}">Delete</a></td>
 
-    </tr>
-    <br></table>
-    <br>
-    <br>
-    <form action="/admin/addUser" method="post">
-        <input type="text" name="name" placeholder="name"><br>
-        <input type="text" name="surname" placeholder="surname"><br>
-        <input type="text"name="email" placeholder="email"><br>
-        <input type="text" name="age" placeholder="age"><br>
-        <input type="password" name="password" placeholder="password"><br>
-        <input type="text" name="phoneNum" placeholder="phoneNumber"><br>
-        <input type="text" name="address" placeholder="address"><br>
-        UserType: <select name="userType">
-        <option value="LECTURER">LECTURER</option>
-        <option value="STUDENT">STUDENT</option>
-    </select>
-        COURSE: <select name="course.id">
-        <option th:each="course: ${courses}"
-                th:text="${course.name}"
-                th:value="${course.id}">
-        </option>
-    </select>
-        <input type="submit" value="Add">
-    </form>
 
-<br>
-<br>
+</table>
 </body>
 </html>

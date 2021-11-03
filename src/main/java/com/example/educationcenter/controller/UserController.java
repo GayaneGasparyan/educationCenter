@@ -2,7 +2,7 @@ package com.example.educationcenter.controller;
 
 import com.example.educationcenter.model.Course;
 import com.example.educationcenter.model.User;
-import com.example.educationcenter.model.UserType;
+
 import com.example.educationcenter.security.CurrentUser;
 import com.example.educationcenter.service.CourseService;
 import com.example.educationcenter.service.UserService;
@@ -25,31 +25,18 @@ public class UserController {
     private final UserService userService;
     private final CourseService courseService;
 
-
     private final PasswordEncoder passwordEncoder;
 
 
-    @GetMapping("/user")
-    public String userPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        modelMap.addAttribute("user", currentUser.getUsername());
-        return "user";
-    }
-
-    @GetMapping("/users")
-    public String users(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        List<User> all = userService.findAllByCourseId(currentUser.getUser().getCourse().getId());
-        modelMap.addAttribute("users", all);
-        return "users";
-    }
-
-
-    @PostMapping("/admin/addUser")
-    public String addLecturersPost(@ModelAttribute User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.save(user);
-        return "redirect:/users";
-    }
-
+    //    @GetMapping("/admin")
+//    public String users(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+//        List<User> all = userService.findAllByCourseId(currentUser.getUser().getCourse().getId());
+//        modelMap.addAttribute("users", all);
+//        List<Course> course =courseService.findAll();
+//        modelMap.addAttribute("courses",course);
+//
+//        return "admin";
+//    }
 
     @GetMapping("/admin")
     public String adminGet(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
@@ -61,6 +48,15 @@ public class UserController {
         return "admin";
     }
 
+    @PostMapping("/admin/addUser")
+    public String addLecturersPost(@ModelAttribute User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.save(user);
+        return "redirect:/admin";
+    }
+
+
+
     @GetMapping("/userDelete")
     public String deleteUser(@RequestParam int id) {
         userService.deleteById(id);
@@ -68,15 +64,15 @@ public class UserController {
     }
 
 
-
     @GetMapping(value = "/studentUpdate")
     public String changeUserData(ModelMap map, @ModelAttribute("user") User user, @RequestParam("id") int id) {
         Optional<User> one = userService.getOne(id);
         map.addAttribute("users", userService.findAll());
         map.addAttribute("user", one.get());
-
+        List<Course> list = courseService.findAll();
+       map.addAttribute("courses", list);
         return "studentUpdate";
     }
 
 
- }
+}

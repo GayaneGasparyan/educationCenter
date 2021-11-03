@@ -1,23 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
-<form action="/admin/addUser" method="post">
-    edit User Data<br>
-    <input type="hidden" name="id" th:value="${user.id}"><br>
-    <input type="text" name="name" th:value="${user.name}"><br>
-    <input type="text" name="surname" th:value="${user.surname}"><br>
-    <input type="text" name="email" th:value="${user.email}"><br>
-    <input type="password" name="password" th:value="${user.password}"><br>
-    <input type="number" name="age" th:value="${user.age}"><br>
-    <input type="text" name="phoneNum" th:value="${user.phoneNum}"><br>
-    <input type="text" name="address" th:value="${user.address}"><br>
+<form action="/admin/addUser" method="post"> <br>
 
-</select>
+  <h3 >edit User Data </h3>  <br>
+
+    <input type="hidden" name="id" th:value="${user.id}"><br>
+    NAME      <input type="text" name="name" th:value="${user.name}"><br>
+    SURNAME   <input type="text" name="surname" th:value="${user.surname}"><br>
+    EMAIL     <input type="text" name="email" th:value="${user.email}"><br>
+    PASSWORD  <input type="password" name="password" th:value="${user.password}"><br>
+    AGE       <input type="number" name="age" th:value="${user.age}"><br>
+    PHONE NUM <input type="text" name="phoneNum" th:value="${user.phoneNum}"><br>
+    ADDRESS   <input type="text" name="address" th:value="${user.address}"><br>
+    UserType: <select name="userType">
+        <option value="LECTURER">LECTURER</option>
+        <option value="STUDENT">STUDENT</option>
+    </select><br>
+  COURSE:  <select name="course.id">
+        <option
+                th:each="course:${courses}"
+                th:text="${course.name}"
+                th:value="${course.id}">
+        </option>
+    </select>
+    <input type="submit" value="Add">
+
+    </select>
 
     <input type="submit" value="save">
 </form>

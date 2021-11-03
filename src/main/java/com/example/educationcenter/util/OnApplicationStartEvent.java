@@ -31,7 +31,7 @@ public class OnApplicationStartEvent implements ApplicationListener<ApplicationR
         if (!userRepository.findByEmail("admin@mail.com").isPresent()) {
 
             Course course = courseRepository.save(Course.builder()
-                    .name("Default course")
+                    .name("Java course")
                     .duration("java")
                     .build());
             userRepository.save(User.builder()
