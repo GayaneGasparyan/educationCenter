@@ -36,8 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/admin/**")
                 .hasAnyAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET, "/showmassage/**")
-                .hasAnyAuthority("LECTURER", "ADMIN", "STUDENT")
+
                 .antMatchers(HttpMethod.GET, "/massage/**")
                 .hasAnyAuthority("LECTURER", "ADMIN", "STUDENT")
                 .antMatchers(HttpMethod.GET, "/lecturer/**")
