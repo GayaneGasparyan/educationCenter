@@ -32,6 +32,12 @@ public class CourseController {
         modelMap.addAttribute("users", all);
         return "admin";
     }
+    @GetMapping("/myCourses")
+    public String getMyClassmates(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        List<User> all = userService.findAllByCourseId(currentUser.getUser().getCourse().getId());
+        modelMap.addAttribute("users", all);
+        return "myCoursee";
+    }
 
     @PostMapping("/addCourse")
     public String addCoursePost(@ModelAttribute Course course) {
