@@ -8,12 +8,16 @@
 <a href="/login">LOGIN</a><br>
 <br>
 
-<br>
 <h1>WELCOME EDUCATION CENTER PLANEMO</h1>
+
 <br>
-<a href="/admin"> ADMIN  </a><br>
-<a href="/lecturer"> LECTURERS </a><br>
-<a href="/student"> STUDENTS </a><br>
+<div th:include="/fragments/header:: lang"></div>
+<a th:text="#{home.menu.user.page}" href="/admin">Admin</a> | <a th:text="#{home.menu.lecturer.page}" href="/lecturer">LECTURER</a> | <a th:text="#{home.menu.student.page}" href="/student">STUDENT</a>
+
+<br>
+<!--<a href="/admin"> ADMIN  </a><br>-->
+<!--<a href="/lecturer"> LECTURERS </a><br>-->
+<!--<a href="/student"> STUDENTS </a><br>-->
 
 </body>
 </html>
