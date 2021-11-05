@@ -6,15 +6,24 @@
 </head>
 <body>
 
-<a href="/myCourses"> My Course</a>
+<!--<a href="/myCourses"> My Course</a>
 <br>
 <a href="/showMessages"> My Messages </a>
 <br>
 <a href="/homeWorks"> My HomeWorks </a>
+<br>-->
+<!--<a href="/logout">logout</a>
 <br>
-<a href="/logout">logout</a>
+<a href="/">home</a><br>-->
+
+<div th:include="/fragments/header:: lang"></div>
+<a th:text="#{student.myCourse}" href="/myCourses">My Course</a> |
+<a th:text="#{student.showMessages}" href="/showMessages">My Messages</a> |
+<a th:text="#{student.homeworks}" href="/homeWorks">My HomeWorks</a>
+
 <br>
-<a href="/">home</a><br>
+<a th:text="#{student.logout}" href="/logout">Logout</a> |
+<a th:text="#{student.home}" href="/">Home</a> |
 
 </body>
 </html>
