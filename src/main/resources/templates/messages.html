@@ -20,9 +20,15 @@
 
 </form>
 
-<a href="/showMessages">Show all messages</a>
-<a href="/logout">logout</a><br>
-<a href="/homeWorks"> My HomeWorks </a>
+<div th:include="/fragments/header:: lang"></div>
+<a th:text="#{student.showMessages}" href="/showMessages">Show all Messages</a> |
+<a th:text="#{student.homeworks}" href="/homeWorks">My HomeWorks</a>
+
+<br>
+<a th:text="#{student.logout}" href="/logout">Logout</a> |
+
+<br>
+
 <br>
 </body>
 </html>

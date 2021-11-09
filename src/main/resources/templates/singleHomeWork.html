@@ -21,7 +21,15 @@
     <input type="submit" value="add Comment">
 </form>
 
-<a href="/homeWorks"> My HomeWorks </a>
+<!--<a href="/homeWorks"> My HomeWorks </a>-->
+<div th:include="/fragments/header:: lang"></div>
+<a th:text="#{student.showMessages}" href="/showMessages">My Messages</a> |
+<a th:text="#{student.homeworks}" href="/homeWorks">My HomeWorks</a>
+
+<br>
+<a th:text="#{student.logout}" href="/logout">Logout</a> |
+<a th:text="#{student.home}" href="/">Home</a> |
+<br>
 <br>
 </body>
 </html>
