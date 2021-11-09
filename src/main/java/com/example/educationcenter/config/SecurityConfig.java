@@ -43,9 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAnyAuthority("LECTURER", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/student/**")
                 .hasAnyAuthority("STUDENT", "ADMIN")
-                .antMatchers(HttpMethod.GET, "/addUser")
+              //  .antMatchers(HttpMethod.GET, "/addUser")
 //                .hasAnyAuthority("ADMIN")
-                .permitAll()
+
                 .antMatchers(HttpMethod.GET, "/courses/**")
                 .hasAnyAuthority("LECTURER", "ADMIN")
                 .and()

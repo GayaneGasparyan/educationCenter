@@ -7,6 +7,7 @@ import com.example.educationcenter.security.CurrentUser;
 import com.example.educationcenter.service.CourseService;
 import com.example.educationcenter.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,22 +22,13 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
     private final UserService userService;
     private final CourseService courseService;
 
     private final PasswordEncoder passwordEncoder;
 
-
-    //    @GetMapping("/admin")
-//    public String users(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-//        List<User> all = userService.findAllByCourseId(currentUser.getUser().getCourse().getId());
-//        modelMap.addAttribute("users", all);
-//        List<Course> course =courseService.findAll();
-//        modelMap.addAttribute("courses",course);
-//
-//        return "admin";
-//    }
 
     @GetMapping("/admin")
     public String adminGet(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
@@ -45,6 +37,8 @@ public class UserController {
         modelMap.addAttribute("users", user);
         List<Course> courseList = courseService.findAll();
         modelMap.addAttribute("courses", courseList);
+        log.info("User with {} username opened admin page", currentUser.getUser().getEmail());
+
         return "admin";
     }
 
@@ -65,12 +59,14 @@ public class UserController {
 
 
     @GetMapping(value = "/studentUpdate")
-    public String changeUserData(ModelMap map, @ModelAttribute("user") User user, @RequestParam("id") int id) {
+    public String changeUserData(ModelMap map, @ModelAttribute("user") User user, @RequestParam("id") int id,@AuthenticationPrincipal CurrentUser currentUser) {
         Optional<User> one = userService.getOne(id);
         map.addAttribute("users", userService.findAll());
         map.addAttribute("user", one.get());
         List<Course> list = courseService.findAll();
        map.addAttribute("courses", list);
+       log.info("User with {} username updates user data",currentUser.getUser().getEmail()) ;
+
         return "studentUpdate";
     }
 
