@@ -5,10 +5,22 @@
     <title>Title</title>
 </head>
 <body>
-My Classmates  <a href="/homeWorks">homeWorks</a>
+<div th:include="/fragments/header:: lang"></div>
+<a th:text="#{student.showMessages}" href="/showMessages">My Messages</a> |
+<a th:text="#{student.homeworks}" href="/homeWorks">My HomeWorks</a>
+
+<br>
+<a th:text="#{student.logout}" href="/logout">Logout</a> |
+<a th:text="#{student.home}" href="/">Home</a> |
+<br>
+<br>
+<!--My Classmates--> <!-- <a href="/homeWorks">homeWorks</a>
 <a href="/showMessages">Show all messages</a>
-<a href="/logout">logout</a><br>
+<a href="/logout">logout</a><br>-->
+
 <table border="1">
+
+
     <form action="/student" method="get">
     <tr>
         <th>id</th>
@@ -20,7 +32,7 @@ My Classmates  <a href="/homeWorks">homeWorks</a>
         <td th:text="${user.getId}"></td>
         <td th:text="${user.getName()}"></td>
         <td th:text="${user.getAge()}" ></td>
-        <td ><a th:href="@{/messages/{id}(id=${user.id})}" href ="#"><a href="/messages">massage</a>
+        <td ><a th:href="@{/messages/{id}(id=${user.id})}" href ="#"><a th:text="#{student.messages}" href="/messages">Send Message</a>
         </a>
     </tr>
 

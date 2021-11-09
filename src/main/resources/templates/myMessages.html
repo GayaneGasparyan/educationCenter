@@ -5,10 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/messages">send message</a>
+<div th:include="/fragments/header:: lang"></div>
+<a th:text="#{student.messages}" href="/messages">Send Message</a> |
+<a th:text="#{student.homeworks}" href="/homeWorks">My HomeWorks</a>
+
+<br>
+<a th:text="#{student.logout}" href="/logout">Logout</a> |
+<a th:text="#{student.home}" href="/">Home</a> |
+<br>
+
+
+
+<!--<a href="/messages">send message</a>
 <a href="/logout">logout</a><br>
 <a href="/homeWorks"> My HomeWorks </a>
-<br>
+<br>-->
 
 <table border="1">
 <tr>
